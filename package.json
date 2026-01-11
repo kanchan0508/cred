@@ -1,0 +1,10 @@
+{
+  "name": "frontass-monorepo",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "cd client && npm install && npm run build"
+  },
+  "devDependencies": {
+     "concurrently": "^8.2.0"
+  }
+}
