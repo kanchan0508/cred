@@ -20,7 +20,7 @@ const Dashboard = () => {
   const fetchTasks = async () => {
     setLoading(true);
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/tasks?status=${filter}&search=${search}`);
+      const res = await axios.get(`${import.meta.env.VITE_API_URL || ''}/api/tasks?status=${filter}&search=${search}`);
       setTasks(res.data);
     } catch (err) {
       console.error(err);
@@ -39,7 +39,7 @@ const Dashboard = () => {
   const handleDelete = async (id) => {
     if (window.confirm('Are you sure you want to delete this task?')) {
       try {
-        await axios.delete(`${import.meta.env.VITE_API_URL}/api/tasks/${id}`);
+        await axios.delete(`${import.meta.env.VITE_API_URL || ''}/api/tasks/${id}`);
         setTasks(tasks.filter(t => t._id !== id));
       } catch (err) {
         console.error(err);
@@ -62,10 +62,10 @@ const Dashboard = () => {
     e.preventDefault();
     try {
       if (currentTask) {
-        const res = await axios.put(`${import.meta.env.VITE_API_URL}/api/tasks/${currentTask._id}`, formData);
+        const res = await axios.put(`${import.meta.env.VITE_API_URL || ''}/api/tasks/${currentTask._id}`, formData);
         setTasks(tasks.map(t => (t._id === currentTask._id ? res.data : t)));
       } else {
-        const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/tasks`, formData);
+        const res = await axios.post(`${import.meta.env.VITE_API_URL || ''}/api/tasks`, formData);
         setTasks([res.data, ...tasks]);
       }
       setIsModalOpen(false);
