@@ -26,7 +26,7 @@ export const AuthProvider = ({ children }) => {
   const login = async (email, password) => {
     try {
       // NOTE: Ensure backend is running on 5000
-      const res = await axios.post('http://localhost:5000/api/auth/login', { email, password });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, { email, password });
       const { token: newToken, user: newUser } = res.data;
       
       localStorage.setItem('token', newToken);
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (username, email, password) => {
     try {
-      await axios.post('http://localhost:5000/api/auth/register', { username, email, password });
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, { username, email, password });
       return { success: true };
     } catch (err) {
       console.error(err);
